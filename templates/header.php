@@ -18,9 +18,11 @@
             <?php if(isset($_SESSION['user'])): ?>
                 <li><a href="index.php?page=articles">Articles</a></li>
                 <li><a href="index.php?page=articles">Dernières actus</a></li>
-                <li><a href="index.php?page=home">Se déconnecter</a></li>
-            <?php endif; ?>
-            <li><a href="index.php?page=login">Se connecter</a></li>
+                <li><a href=""><?= $_SESSION['user']->firstname . ' ' . $_SESSION['user']->lastname ?></a></li>
+                <li><a href="index.php?page=logout">Se déconnecter</a></li>
+            <?php else: ?>
+                <li><a href="index.php?page=login">Se connecter</a></li>
+            <?php endif; ?>    
         </ul>
     </nav>
 </header>

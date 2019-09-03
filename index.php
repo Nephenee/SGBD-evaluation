@@ -1,7 +1,6 @@
 <?php
     require_once('services/app.php');
     include_once('templates/header.php');
-    /* TODO: faire un switch pour que l'index.php soit un controlleur frontal */
 
     if (!isset($_GET['page'])) {
         $page = 'home';
@@ -24,6 +23,13 @@
         
         case 'add_article':
             include_once('views/products/add.php');
+            break;
+        
+        case 'logout':
+            session_destroy();
+            var_dump($_SESSION);
+            header("Location: /index.php");
+            exit;
             break;
         
         default:

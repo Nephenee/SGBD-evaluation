@@ -1,11 +1,30 @@
 <?php
-    if(isset($_SESSION['user'])): ?>
+    require_once('models/product.php');
 
-    Hello world
+    use \Product as Product;
 
-<?php else:
-    header("Location: /");
-    exit;
-    endif;
+    if(!isset($_SESSION['user'])):
+        header("Location: /");
+        exit;
+    else:
+        $products = Product\getAll();
+
+        if (!$products) {
+            $error = 'Erreur : aucun article trouvé';
+        }
+        var_dump($products);
 ?>
+
+<section class="ctn">
+    <section class="section">
+        <div class="home__subheader">
+            <h1 class="title">ARO BIO HUILES</h1>
+        </div>
+    </section>
+    <section class="section">
+        <?php /*TODO: faire la boucle pour afficher les articles ici */ ?>
+    </section>
+</section>
+
+<?php endif; ?>
 

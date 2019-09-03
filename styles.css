@@ -3,14 +3,15 @@
 /* --------------- */
 .body {
     font-family: 'Lato', sans-serif;
-    font-size: 20px;
+    font-size: 1em;
     color: #333333;
 }
 
 .header {
-    position: fixed;
+    //position: fixed;
     width: 100%;
-    height: 70px;
+    height: 7%;
+    z-index: 10;
 }
 
 .header__nav {
@@ -37,7 +38,7 @@
 .header__nav__list li a {
     background-color: #ab92af;
     color: #eeeeee;
-    transition: ease 400ms;
+    transition: background-color ease 400ms;
     height: 100%;
     width: 100%;
     display: flex;
@@ -46,16 +47,52 @@
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 2px;
+    text-align: center;
 }
 
-.header__nav__list li:hover {
+.header__nav__list li a:hover {
     background-color: #b72f79;
-    transition: ease 400ms;
+    transition: background-color ease 400ms;
 }
 
 .footer {
     height: 250px;
-    background-color: black;
+    background-color: #333333;
+    color: #eeeeee;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.5em;
+    font-style: italic;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.footer__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 50%;
+}
+
+.footer__list {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    font-style: initial;
+}
+
+.divider--white {
+    width: 90%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .section {
@@ -65,22 +102,26 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
 }
 
 .title {
     color: #eeeeee;
-    font-size: 80px;
+    font-size: 5em;
     z-index: 1;
     font-family: 'Damion', cursive;
     text-shadow: 2px 2px 4px #333333;
+    text-align: center;
 }
 
 
 .subtitle {
-    font-size: 50px;
-    line-height: 90px;
+    font-size: 2em;
+    line-height: 1.5em;
     font-family: 'Damion', cursive;
-    text-indent: 50px;
+    text-indent: 1.5em;
+    text-shadow: 2px 2px 4px #eeeeee;
+    padding-bottom: 1em;
 }
 
 .ctn {
@@ -104,6 +145,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    height: 100%;
 }
 
 .home__content {
@@ -119,11 +162,13 @@
     background-color: #afc30c;
     border-radius: 10px;
     width: 60%;
-    font-size: 16px;
-    padding: 30px;
-    line-height: 30px;
+    padding: 1.5em;
+    line-height: 2em;
     align-self: flex-end;
     margin-right: 5%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 90vh;
 }
 
 .home__content__bio h2 {
@@ -131,7 +176,7 @@
 }
 
 .home__content__values {
-    padding: 30px;
+    padding: 1.5em;
     width: 60%;
     align-self: flex-start;
     margin-left: 5%;
@@ -141,12 +186,13 @@
 }
 
 .values__list {
-    align-self: flex-start;    font-size: 30px;
+    align-self: flex-start;
+    font-size: 1.5em;
     font-family: 'Damion', cursive;
 }
 
 .values__list li {
-    line-height: 50px;
+    line-height: 1.5em;
 }
 
 .home__content__recyclable {
@@ -154,13 +200,18 @@
     width: 60%;
     border: 2px solid #b72f79;
     border-radius: 10px;
-    padding: 30px;
+    padding: 1.5em;
 }
 
 .home__content__recyclable h2 {
     color: #b72f79;
-    font-size: 30px;
-    line-height: 40px;
+    font-size: 1.25em;
+    line-height: 1.25em;
+}
+
+.home__content__recyclable img {
+    width: 100%;
+    height: auto;
 }
 
 
@@ -171,7 +222,7 @@
     justify-content: space-evenly;
     align-items: center;
     width: 60%;
-    height: 25%;
+    height: 35%;
 }
 
 .subtitle--connect {
@@ -179,8 +230,9 @@
 }
 
 .login__form__input {
-    height: 50px;
-    font-size: 20px;
+    width: 50%;
+    height: 15%;
+    font-size: 1em;
     border-radius: 10px;
     background-color: rgba(255,255,255,0.8);
     border: none;
@@ -189,10 +241,38 @@
 }
 
 .login__form__button {
-    font-size: 20px;
+    font-size: 1em;
     color: #eeeeee;
     background-color: #ab92af;
     border: none;
     padding: 15px 50px;
     border-radius: 10px;
+    transition: background-color ease 400ms;
+    cursor: pointer;
+}
+
+.login__form__button:hover {
+    background-color: #b72f79;
+    transition: background-color ease 400ms;
+}
+
+.form__error {
+    font-size: 3em;
+    font-family: 'Damion', cursive;
+    color: #b72f79;
+    text-shadow: 2px 2px 4px #333333;
+}
+
+
+/* --------------- */
+/* ---- MEDIA ---- */
+/* --------------- */
+@media screen and (max-width: 640px) {
+    .footer__list {
+        flex-direction: column;
+    }
+
+    .login__form__input {
+        width: 100%;
+    }
 }
