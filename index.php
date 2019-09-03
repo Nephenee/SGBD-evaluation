@@ -20,8 +20,16 @@
         case 'articles':
             include_once('views/products/articles.php');
             break;
+
+        case 'lasts':
+            include_once('views/products/articles.php');
+            break;
         
         case 'add_article':
+            include_once('views/products/add.php');
+            break;
+
+        case 'update_article':
             include_once('views/products/add.php');
             break;
         

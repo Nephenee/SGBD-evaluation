@@ -7,12 +7,15 @@
         header("Location: /");
         exit;
     else:
-        $products = Product\getAll();
+        if ($_GET['page'] === 'articles') {
+            $products = Product\getAll();
 
-        if (!$products) {
-            $error = 'Erreur : aucun article trouvé';
+            if (!$products) {
+                $error = 'Erreur : aucun article trouvé';
+            }
+        } else if ($_GET['page'] === 'lasts') {
+            $products = Product\getLasts();
         }
-        var_dump($products);
 ?>
 
 <section class="ctn">
@@ -21,9 +24,23 @@
             <h1 class="title">ARO BIO HUILES</h1>
         </div>
     </section>
-    <section class="section">
-        <?php /*TODO: faire la boucle pour afficher les articles ici */ ?>
-    </section>
+    <button class="form__button"><a class="link" href="index.php?page=add_article">Ajouter un article</a></button>
+    <ul class="products__list">
+        <?php foreach ($products as $value): ?>
+            <li class="products__list__card">
+                <h2 class="product__title">
+                    <?= $value->name ?>
+                    <form class="product__delete" method="POST" action="">
+                    <input type="hidden" name="product_id" value="<?= $value->product_id ?>"/>
+                    <button class="product__delete__btn" type="submit" >X</button>
+                </form>
+                </h2>
+                <img class="product__img" alt="<?= $value->name ?>" src="images/<?= $value->image ?>" />
+                <p class="product__text"><?= $value->description ?></p>
+                <p class="product__price">Prix : <span class="product__price__number"><?= $value->price ?> €</span></p>
+            </li>
+        <?php endforeach; ?>
+    </ul>
 </section>
 
 <?php endif; ?>
