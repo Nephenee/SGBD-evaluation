@@ -37,6 +37,14 @@
             include_once('views/cart.php');
             break;
 
+        case 'add_cart':
+            include_once('views/products/products.php');
+            break;
+
+        case 'delete_art':
+            include_once('views/cart.php');
+            break;
+
         case 'users':
             include_once('views/users/users.php');
             break;

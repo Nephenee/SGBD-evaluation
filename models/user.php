@@ -22,6 +22,7 @@
             unset($user->role_id);
             $user->role = $role->role;
             $_SESSION['user'] = $user;
+            $_SESSION['cart'] = [];
             return true;
 
         } else {
