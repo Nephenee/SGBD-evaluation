@@ -16,11 +16,18 @@
         <ul class="header__nav__list">
             <li><a href="index.php?page=home">Accueil</a></li>
             <?php if(isset($_SESSION['user'])): ?>
-                <li><a href="index.php?page=articles">Articles</a></li>
+                <li><a href="index.php?page=products">Articles</a></li>
                 <li><a href="index.php?page=lasts">Dernières actus</a></li>
-                <li><a href=""><?= $_SESSION['user']->firstname . ' ' . $_SESSION['user']->lastname ?></a></li>
-                <li><a href="index.php?page=logout">Se déconnecter</a></li>
+                <ul>
+                    <li><a href=""><?= $_SESSION['user']->firstname ?></a></li>
+                    <li><a href="index.php?page=cart">Panier</a></li>
+                    <?php if ($_SESSION['user']->role === 'admin'): ?>
+                        <li><a href="index.php?page=users">Utilisateurs</a></li>
+                    <?php endif; ?>
+                    <li><a href="index.php?page=logout">Se déconnecter</a></li>
+                </ul>
             <?php else: ?>
+                <li><a href="index.php?page=ask">S'enregistrer</a></li>
                 <li><a href="index.php?page=login">Se connecter</a></li>
             <?php endif; ?>    
         </ul>

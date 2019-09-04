@@ -33,6 +33,21 @@
         }
     }
 
+    function getOne($id)
+    {
+        global $pdo;
+        $stmt = $pdo->prepare('SELECT `product_id`, `name`, `description`, `created`, `image`, `price` FROM products WHERE `product_id`=?');
+        $delete = $stmt->execute([$id]);
+        $product = $stmt->fetch(\PDO::FETCH_OBJ);
+
+        if (isset($product)) {
+            return $product;
+
+        } else {
+            return false;
+        }
+    }
+
     function add($name, $description, $price, ?string $image, ?string $tmp_img)
     {
         global $pdo;
@@ -40,7 +55,9 @@
         if ($image !== '') {
             $stmt = $pdo->prepare('INSERT INTO products (`name`, `description`, `image`, `price`) VALUES (?, ?, ?, ?)');
             $result = $stmt->execute([$name, $description, $image, $price]);
-            $updload = move_uploaded_file($tmp_img, "images/$image");
+            if (!file_exists("images/$image")) {
+                $updload = move_uploaded_file($tmp_img, "images/$image");
+            }
 
         } else {
             $stmt = $pdo->prepare('INSERT INTO products (`name`, `description`, `price`) VALUES (?, ?, ?)');
@@ -56,27 +73,49 @@
         }
     }
 
-    function delete($id)
+    function update($id, $name, $description, $price, ?string $image, ?string $tmp_img)
     {
         global $pdo;
-        $stmt = $pdo->prepare('DELETE FROM products WHERE `product_id`=?');
-        $stmt->execute([$_POST['product_id']]);
-        $product = $stmt->fetch(\PDO::FETCH_OBJ);
+        $updload = true;
+        if ($image !== '') {
+            $stmt = $pdo->prepare('UPDATE products SET `name`=?, `description`=?, `image`=?, `price`=? WHERE `product_id`=?');
+            $result = $stmt->execute([$name, $description, $image, $price, $id]);
+            if (!file_exists("images/$image")) {
+                $updload = move_uploaded_file($tmp_img, "images/$image");
+            }
 
-        /*TODO: à finir */
+        } else {
+            $stmt = $pdo->prepare('UPDATE products SET `name`=?, `description`=?, `price`=? WHERE `product_id`=?');
+            $result = $stmt->execute([$name, $description, $price, $id]);
+        }
 
-        if (isset($products)) {
-            return $products;
+
+        if ($result && $updload) {
+            return true;
 
         } else {
             return false;
         }
     }
 
-/*
-    TODO: fonctions :
-        créer produit si admin
-        update produit si admin
-        read produit si user ou admin
-        delete produit si admin
-    */
+    function delete($id)
+    {
+        global $pdo;
+        $stmt = $pdo->prepare('DELETE FROM products WHERE `product_id`=?');
+        $delete = $stmt->execute([$_POST['product_id']]);
+
+        if ($delete) {
+            $stmt = $pdo->query('SELECT `product_id`, `name`, `description`, `created`, `image`, `price` FROM products');
+            $products = $stmt->fetchAll(\PDO::FETCH_OBJ);
+
+            if (isset($products)) {
+                return $products;
+
+            } else {
+                return false;
+            }
+
+        } else {
+            return false;
+        }
+    }

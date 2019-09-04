@@ -17,20 +17,28 @@
             include_once('views/login.php');
             break;
         
-        case 'articles':
-            include_once('views/products/articles.php');
+        case 'products':
+            include_once('views/products/products.php');
             break;
 
         case 'lasts':
-            include_once('views/products/articles.php');
+            include_once('views/products/products.php');
             break;
         
-        case 'add_article':
+        case 'add_product':
             include_once('views/products/add.php');
             break;
 
-        case 'update_article':
+        case 'update_product':
             include_once('views/products/add.php');
+            break;
+
+        case 'cart':
+            include_once('views/cart.php');
+            break;
+
+        case 'users':
+            include_once('views/users/users.php');
             break;
         
         case 'logout':
