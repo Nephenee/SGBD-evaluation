@@ -41,12 +41,16 @@
             include_once('views/products/products.php');
             break;
 
-        case 'delete_art':
+        case 'delete_cart':
             include_once('views/cart.php');
             break;
 
         case 'users':
             include_once('views/users/users.php');
+            break;
+        
+        case 'bill':
+            include_once('views/bill.php');
             break;
         
         case 'logout':

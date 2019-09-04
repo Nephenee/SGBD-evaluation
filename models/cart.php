@@ -8,17 +8,14 @@
     function getAll($ids)
     {
         global $pdo;
-        $products = [];
-
-        foreach ($ids as $id) {
-            $stmt = $pdo->prepare('SELECT `product_id`, `name`, `description`, `created`, `image`, `price` FROM products WHERE `product_id`=?');
-            $stmt->execute([$id]);
-            $product = $stmt->fetch(\PDO::FETCH_OBJ);
-    
-            if (isset($products)) {
-                array_push($products, $product);
-            }
-        }
+        $in = str_repeat('?,', count($ids) - 1) . '?';
+        $stmt = $pdo->prepare(
+            "SELECT `product_id`, `name`, `description`, `created`, `image`, `price`
+            FROM products
+            WHERE `product_id`IN ({$in})"
+        );
+        $stmt->execute(array_keys($ids));
+        $products = $stmt->fetchAll(\PDO::FETCH_OBJ);
 
         return $products;
     }

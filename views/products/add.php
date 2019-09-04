@@ -48,9 +48,9 @@
         <?php if($_GET['page'] === 'add_product'): ?>
         <form class="form" method="POST" enctype="multipart/form-data" action="">
             <input class="form__input" type="text" name="name" placeholder="Nom du produit" />
-            <input class="form__input" type="text" name="description" placeholder="Description" />
+            <textarea class="form__input form__input--area" name="description" placeholder="Description (optionnel)" ></textarea>
             <input class="form__input--file" type="file" name="image" id="image" />
-            <label for="image" class="form__input form__input--label">Choisir un fichier</label>
+            <label for="image" class="form__input form__input--label">Choisir un fichier (optionnel)</label>
             <input class="form__input" type="number" step=".01" name="price" placeholder="0.00" />
             <button class="form__button" type="submit">Valider</button>
         </form>
@@ -58,9 +58,9 @@
             <form class="form" method="POST" enctype="multipart/form-data" action="">
                 <input type="hidden" name="product_id" value=<?= $product->product_id ?> />
                 <input class="form__input" type="text" name="name" value="<?= $product->name ?>" />
-                <input class="form__input" type="text" name="description" value="<?= $product->description ?>" />
+                <textarea class="form__input form__input--area" name="description" placeholder="Description (optionnel)" ><?= $product->description ?></textarea>
                 <input class="form__input--file" type="file" name="image" id="image" />
-                <label for="image" class="form__input form__input--label">Choisir un fichier</label>
+                <label for="image" class="form__input form__input--label">Choisir un fichier (optionnel)</label>
                 <input class="form__input" type="number" step=".01" name="price" value="<?= $product->price ?>" />
                 <button class="form__button" type="submit">Modifier</button>
             </form>
