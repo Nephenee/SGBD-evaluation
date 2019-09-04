@@ -8,7 +8,10 @@
     function getAll()
     {
         global $pdo;
-        $stmt = $pdo->query('SELECT `product_id`, `name`, `description`, `created`, `image`, `price` FROM products');
+        $stmt = $pdo->query(
+            'SELECT `product_id`, `name`, `description`, `created`, `image`, `price`, `quantity`
+            FROM products'
+        );
         $products = $stmt->fetchAll(\PDO::FETCH_OBJ);
 
         if (isset($products)) {
@@ -22,7 +25,12 @@
     function getLasts()
     {
         global $pdo;
-        $stmt = $pdo->query('SELECT `product_id`, `name`, `description`, `created`, `image`, `price` FROM products ORDER BY `created` DESC LIMIT 10');
+        $stmt = $pdo->query(
+            'SELECT `product_id`, `name`, `description`, `created`, `image`, `price`, `quantity`
+            FROM products
+            ORDER BY `created` DESC
+            LIMIT 10'
+        );
         $products = $stmt->fetchAll(\PDO::FETCH_OBJ);
 
         if (isset($products)) {
@@ -36,7 +44,11 @@
     function getOne($id)
     {
         global $pdo;
-        $stmt = $pdo->prepare('SELECT `product_id`, `name`, `description`, `created`, `image`, `price` FROM products WHERE `product_id`=?');
+        $stmt = $pdo->prepare(
+            'SELECT `product_id`, `name`, `description`, `created`, `image`, `price`, `quantity`
+            FROM products
+            WHERE `product_id`=?'
+        );
         $delete = $stmt->execute([$id]);
         $product = $stmt->fetch(\PDO::FETCH_OBJ);
 
@@ -48,20 +60,26 @@
         }
     }
 
-    function add($name, $description, $price, ?string $image, ?string $tmp_img)
+    function add($name, $description, $price, $quantity, ?string $image, ?string $tmp_img)
     {
         global $pdo;
         $updload = true;
         if ($image !== '') {
-            $stmt = $pdo->prepare('INSERT INTO products (`name`, `description`, `image`, `price`) VALUES (?, ?, ?, ?)');
-            $result = $stmt->execute([$name, $description, $image, $price]);
+            $stmt = $pdo->prepare(
+                'INSERT INTO products (`name`, `description`, `image`, `price`, `quantity`)
+                VALUES (?, ?, ?, ?, ?)'
+            );
+            $result = $stmt->execute([$name, $description, $image, $price, $quantity]);
             if (!file_exists("images/$image")) {
                 $updload = move_uploaded_file($tmp_img, "images/$image");
             }
 
         } else {
-            $stmt = $pdo->prepare('INSERT INTO products (`name`, `description`, `price`) VALUES (?, ?, ?)');
-            $result = $stmt->execute([$name, $description, $price]);
+            $stmt = $pdo->prepare(
+                'INSERT INTO products (`name`, `description`, `price`, `quantity`)
+                VALUES (?, ?, ?, ?)'
+            );
+            $result = $stmt->execute([$name, $description, $price, $quantity]);
         }
 
 
@@ -73,20 +91,26 @@
         }
     }
 
-    function update($id, $name, $description, $price, ?string $image, ?string $tmp_img)
+    function update($id, $name, $description, $price, $quantity, ?string $image, ?string $tmp_img)
     {
         global $pdo;
         $updload = true;
         if ($image !== '') {
-            $stmt = $pdo->prepare('UPDATE products SET `name`=?, `description`=?, `image`=?, `price`=? WHERE `product_id`=?');
-            $result = $stmt->execute([$name, $description, $image, $price, $id]);
+            $stmt = $pdo->prepare(
+                'UPDATE products SET `name`=?, `description`=?, `image`=?, `price`=?, `quantity`=?
+                WHERE `product_id`=?'
+            );
+            $result = $stmt->execute([$name, $description, $image, $price, $quantity, $id]);
             if (!file_exists("images/$image")) {
                 $updload = move_uploaded_file($tmp_img, "images/$image");
             }
 
         } else {
-            $stmt = $pdo->prepare('UPDATE products SET `name`=?, `description`=?, `price`=? WHERE `product_id`=?');
-            $result = $stmt->execute([$name, $description, $price, $id]);
+            $stmt = $pdo->prepare(
+                'UPDATE products SET `name`=?, `description`=?, `price`=?, `quantity`=?
+                WHERE `product_id`=?'
+            );
+            $result = $stmt->execute([$name, $description, $price, $quantity, $id]);
         }
 
 
@@ -101,11 +125,17 @@
     function delete($id)
     {
         global $pdo;
-        $stmt = $pdo->prepare('DELETE FROM products WHERE `product_id`=?');
+        $stmt = $pdo->prepare(
+            'DELETE FROM products
+            WHERE `product_id`=?'
+        );
         $delete = $stmt->execute([$_POST['product_id']]);
 
         if ($delete) {
-            $stmt = $pdo->query('SELECT `product_id`, `name`, `description`, `created`, `image`, `price` FROM products');
+            $stmt = $pdo->query(
+                'SELECT `product_id`, `name`, `description`, `created`, `image`, `price`, `quantity`
+                FROM products'
+            );
             $products = $stmt->fetchAll(\PDO::FETCH_OBJ);
 
             if (isset($products)) {

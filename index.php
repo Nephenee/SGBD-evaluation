@@ -45,8 +45,8 @@
             include_once('views/cart.php');
             break;
 
-        case 'users':
-            include_once('views/users/users.php');
+        case 'valid_cart':
+            include_once('views/cart.php');
             break;
         
         case 'bill':

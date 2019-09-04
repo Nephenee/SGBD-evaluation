@@ -28,6 +28,24 @@
 | created | timestamp [CURRENT_TIMESTAMP] |
 | image | varchar(255) NULL |
 | price | decimal(6,2) [0.00] |
+
+### table bills
+| Colonne | Specificités |
+| ------- | ------------ |
+| bill_id | clé primaire - int(11) IA |
+| user_id | clé étrangère - int(11) |
+| created | timestamp [CURRENT_TIMESTAMP] |
+| price | decimal(6,2) [0.00] |
+| adress | varchar(255) - [5 place Charles Hernu, 69100 VILLEURBANNE]
+
+### table bill_lines
+| Colonne | Specificités |
+| ------- | ------------ |
+| line_id | clé primaire - int(11) IA |
+| bill_id | clé étrangère - int(11) |
+| product_id | clé étrangère - int(11) |
+| quantity | int(11) |
+| price | decimal(6,2) [0.00] |
 ----
 
 ## Vagrant
@@ -61,3 +79,8 @@ Un invité doit demander un droit d'inscription à l'administrateur. Un utilisat
 ### technologies
 - PHP procédural
 - PDO
+
+### trigger
+```mysql
+
+```

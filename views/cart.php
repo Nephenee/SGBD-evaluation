@@ -39,7 +39,8 @@
         }
 
     } else if ($_GET['page'] === 'valid_cart') {
-        
+        // faire les requêtes pour ajouter bill
+        $products = Cart\addBill($_SESSION['cart'], number_format(array_sum(array_column($products, 'totalPrice')), 2), $_SESSION['user']->user_id);
         $_SESSION['cart'] = [];
         header("Location: /index.php?page=bill");
         exit;

@@ -82,6 +82,7 @@
                 <p class="product__text"><?= $product->description ?></p>
                 <p class="product__price">Prix : <span class="product__price__number"><?= $product->price ?> €</span></p>
                 <?php if ($_SESSION['user']->role === 'admin'): ?>
+                <p class="product__text">Quantité : <span class="product__price__number"><?= $product->quantity ?></span></p>
                     <button class="form__button form__button--product">
                         <a class="link" href="index.php?page=update_product&id=<?= $product->product_id ?>">Modifier</a>
                     </button>

@@ -10,7 +10,7 @@
         exit;
     else:
         if ($_GET['page'] === 'add_product' && $_POST) {
-            $product = Product\add($_POST['name'], $_POST['description'], $_POST['price'], $_FILES['image']['name'], $_FILES['image']['tmp_name']);
+            $product = Product\add($_POST['name'], $_POST['description'], $_POST['price'], $_POST['quantity'], $_FILES['image']['name'], $_FILES['image']['tmp_name']);
 
             if ($product) {
                 header("Location: /index.php?page=products&message=0");
@@ -24,7 +24,7 @@
                 $product = Product\getOne($_GET['id']);
 
                 if($_POST) {
-                    $product = Product\update($_POST['product_id'], $_POST['name'], $_POST['description'], $_POST['price'], $_FILES['image']['name'], $_FILES['image']['tmp_name']);
+                    $product = Product\update($_POST['product_id'], $_POST['name'], $_POST['description'], $_POST['price'], $_POST['quantity'], $_FILES['image']['name'], $_FILES['image']['tmp_name']);
 
                     if ($product) {
                         header("Location: /index.php?page=products&message=1");
@@ -52,6 +52,7 @@
             <input class="form__input--file" type="file" name="image" id="image" />
             <label for="image" class="form__input form__input--label">Choisir un fichier (optionnel)</label>
             <input class="form__input" type="number" step=".01" name="price" placeholder="0.00" />
+            <input class="form__input" type="number" name="quantity" placeholder="0" />
             <button class="form__button" type="submit">Valider</button>
         </form>
         <?php else: ?>
@@ -62,6 +63,7 @@
                 <input class="form__input--file" type="file" name="image" id="image" />
                 <label for="image" class="form__input form__input--label">Choisir un fichier (optionnel)</label>
                 <input class="form__input" type="number" step=".01" name="price" value="<?= $product->price ?>" />
+                <input class="form__input" type="number" name="quantity"  value="<?= $product->quantity ?>" />
                 <button class="form__button" type="submit">Modifier</button>
             </form>
         <?php endif; ?>
