@@ -49,7 +49,7 @@
             FROM products
             WHERE `product_id`=?'
         );
-        $delete = $stmt->execute([$id]);
+        $stmt->execute([$id]);
         $product = $stmt->fetch(\PDO::FETCH_OBJ);
 
         if (isset($product)) {

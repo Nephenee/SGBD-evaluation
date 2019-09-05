@@ -12,6 +12,8 @@
 | password | varchar(255) |
 | firstname | varchar(255) |
 | lastname | varchar(255) |
+| adress | varchar(255) |
+| lastbill | clé étrangère - int(11) |
 
 ### table roles
 | Colonne | Specificités |
@@ -36,7 +38,7 @@
 | user_id | clé étrangère - int(11) |
 | created | timestamp [CURRENT_TIMESTAMP] |
 | price | decimal(6,2) [0.00] |
-| adress | varchar(255) - [5 place Charles Hernu, 69100 VILLEURBANNE]
+| adress | varchar(255) - [5 place Charles Hernu, 69100 VILLEURBANNE] |
 
 ### table bill_lines
 | Colonne | Specificités |
@@ -76,11 +78,21 @@ Un invité doit demander un droit d'inscription à l'administrateur. Un utilisat
 | Accès à l'accueil, à la connexion et à la demande d'inscription | En plus des droits **Guest**, accès aux articles et la visualisation d'un article et au panier et sa validation | En plus des droits **User**, accès à l'ajout, modification et suppression d'un article ainsi que l'ajout d'un user |
 
 
-### technologies
+### technologies / langages
 - PHP procédural
 - PDO
+- triggers
 
 ### trigger
+Actualisation de la colonne *lastbill* dans la table *users* lorsqu'une facture est créée : lors d'une insertion dans la table *bills*
 ```mysql
-
+CREATE TRIGGER bills_ai
+AFTER INSERT
+ON bills FOR EACH ROW
+BEGIN
+    UPDATE users
+    SET users.lastbill = NEW.bill_id
+    WHERE users.user_id = NEW.bill_id
+END |
+DELIMITER ;
 ```
