@@ -536,6 +536,110 @@
     font-weight: bold;
 }
 
+/* Bill */
+.bill__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 100%;
+    background-color: white;
+    margin-bottom: 70px;
+    padding: 50px;
+    font-size: 1.15em;
+    line-height: 1.5em;
+}
+
+.bill__subheader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 50px;
+}
+
+.bill__title {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.bill__adress__title {
+    font-weight: bold;
+    font-style: italic;
+}
+
+.bill__text--created {
+    font-size: 1.25em;
+    font-style: italic;
+}
+
+.bill__adress__ets {
+    align-self: flex-end;
+    width: 22.5%;
+}
+
+.bill__adress__client {
+    align-self: flex-start;
+    width: 22.5%;
+}
+
+.bill__info-client {
+    align-self: flex-start;
+    padding-bottom: 20px;
+}
+
+.bill__products__ctn {
+    width: 100%;
+}
+
+.bill__products__ctn {
+    margin: 80px 0;
+    border: 2px solid black;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bill__list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+}
+
+.bill__list__item {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid black;
+}
+
+.bill__list__item:last-of-type {
+    border-bottom: none;
+}
+
+.bill__list__item * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 33%;
+    height: 70px;
+}
+
+.bill__item__title {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.bill__subfooter {
+    align-self: flex-end;
+}
+
+
 /* --------------- */
 /* ---- MEDIA ---- */
 /* --------------- */

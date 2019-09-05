@@ -24,21 +24,25 @@
     {
         global $pdo;
         $stmt = $pdo->prepare(
-            "SELECT `b.bill_id`, `b.created`, `b.price`, `b.adress` as `adress_ets`,
-                `u.firstname`, `u.lastname`, `u.email`, `u.adress` as `adress_cli`,
-                `p.name`, `p.price`,
-                `bl.quantity`
+            "SELECT b.`bill_id`, b.`created`, b.`price` as `price_bill`, b.`adress` as `adress_ets`,
+                u.`user_id`, u.`firstname`, u.`lastname`, u.`email`, u.`adress` as `adress_cli`,
+                p.`name`, p.`price` as `price_product`,
+                bl.`quantity`
             FROM bills_lines as bl
-            LEFT JOIN bills as b ON `bl.bill_id` = `b.bill_id`
-            LEFT JOIN users as u ON `b.user_id` = `u.user_id`
-            LEFT JOIN products as p ON `bl.product_id` = `p.product_id`
-            WHERE `b.user_id` = ?
-            AND `b.bill_id` = `u.lastbill`"
+            LEFT JOIN bills as b ON bl.`bill_id` = b.`bill_id`
+            LEFT JOIN users as u ON b.`user_id` = u.`user_id`
+            LEFT JOIN products as p ON bl.`product_id` = p.`product_id`
+            WHERE b.`user_id` = ?
+            AND b.`bill_id` = u.`lastbill`"
         );
-        $stmt->execute($user);
-        $bill = $stmt->fetch(\PDO::FETCH_OBJ);
+        $stmt->execute([$user]);
+        $lines = $stmt->fetchAll(\PDO::FETCH_OBJ);
 
-        var_dump($bill);die;
+        if ($lines) {
+            return $lines;
+        } else {
+            return false;
+        }
     }
 
     function addBill($ids, $price, $user)
