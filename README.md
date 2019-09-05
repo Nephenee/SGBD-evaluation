@@ -70,7 +70,7 @@ synced_folder : "../DFS15_SGBD_evaluation", "/var/www/html"
 
 ### Sujet
 *AroBioHuiles* est un site d'e-commerce qui permet l'achat d'huiles essentielles bio.
-Un invité doit demander un droit d'inscription à l'administrateur. Un utilisateur enregistré peut visualiser les produits, son panier, ainsi que sa facture. L'administrateur peut modifier les produits.
+Un invité ne peut s'enregistrer : seul l'administrateur peut ajouter un utilisateur. Un utilisateur enregistré peut visualiser les produits, son panier, ainsi que sa facture. L'administrateur peut modifier les produits.
 
 ### Fonctionnalités
 | Guest | User | Admin |

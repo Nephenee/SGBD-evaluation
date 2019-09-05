@@ -668,11 +668,15 @@
         overflow: initial;
     }
 
+    .header__nav__list ul {
+        overflow: initial;
+    }
+
     .header__nav__list li a {
         height: 70px;
     }
 
-    .header__nav__list li a {
+    .header__nav__list ul li a {
         height: 70px;
     }
 }
