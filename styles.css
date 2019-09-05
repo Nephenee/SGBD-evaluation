@@ -679,6 +679,36 @@
     .header__nav__list ul li a {
         height: 70px;
     }
+
+    .cart__list__item {
+        flex-direction: column;
+    }
+
+    .cart__item__img {
+        width: 100%;
+        height: auto;
+    }
+
+    .cart__item__title {
+        width: 100%;
+    }
+
+    .cart__item__description {
+        width: 100%;
+    }
+
+    .cart__item__price {
+        align-self: flex-start;
+        width: 100%;
+    }
+
+    .form__button--cart {
+        align-self: flex-end;
+    }
+
+    .cart__total {
+        flex-direction: column;
+    }
 }
 
 @media screen and (max-width: 640px) {
@@ -700,9 +730,5 @@
 
     .products__list__card {
         width: 100%;
-    }
-
-    .cart__list__item {
-        flex-direction: column;
     }
 }

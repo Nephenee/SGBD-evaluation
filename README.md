@@ -92,7 +92,7 @@ ON bills FOR EACH ROW
 BEGIN
     UPDATE users
     SET users.lastbill = NEW.bill_id
-    WHERE users.user_id = NEW.bill_id
+    WHERE users.user_id = NEW.user_id
 END |
 DELIMITER ;
 ```

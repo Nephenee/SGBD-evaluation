@@ -75,7 +75,7 @@
                         <img class="cart__item__img" alt="<?= $product->name ?>" src="images/<?= $product->image ?>" />
                         <h2 class="cart__item__title"><?= $product->name ?></h2>
                         <p class="cart__item__description"><?= $product->description ?></p>
-                        <p class="cart__item__price"><?= $product->quantity ?></p>
+                        <p class="cart__item__price">Qty : <?= $product->quantity ?></p>
                         <p class="cart__item__price"><?= $product->formatedPrice ?> €</p>
                         <button class="form__button form__button--cart">
                             <a class="link" href="index.php?page=delete_cart&id=<?= $product->product_id ?>&message=2">X</a>
