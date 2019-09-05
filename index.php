@@ -16,6 +16,10 @@
         case 'login':
             include_once('views/login.php');
             break;
+
+        case 'users':
+            include_once('views/users/add.php');
+            break;
         
         case 'products':
             include_once('views/products/products.php');

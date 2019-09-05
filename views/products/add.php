@@ -47,11 +47,11 @@
         <div class="form__error"><?= $error ?></div>
         <?php if($_GET['page'] === 'add_product'): ?>
         <form class="form" method="POST" enctype="multipart/form-data" action="">
-            <input class="form__input" type="text" name="name" placeholder="Nom du produit" />
+            <input class="form__input" type="text" name="name" placeholder="Nom du produit" required />
             <textarea class="form__input form__input--area" name="description" placeholder="Description (optionnel)" ></textarea>
             <input class="form__input--file" type="file" name="image" id="image" />
             <label for="image" class="form__input form__input--label">Choisir un fichier (optionnel)</label>
-            <input class="form__input" type="number" step=".01" name="price" placeholder="0.00" />
+            <input class="form__input" type="number" step=".01" name="price" placeholder="0.00" required />
             <input class="form__input" type="number" name="quantity" placeholder="0" />
             <button class="form__button" type="submit">Valider</button>
         </form>

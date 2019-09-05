@@ -18,10 +18,13 @@ CREATE TABLE `bills` (
   PRIMARY KEY (`bill_id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `bills_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 INSERT INTO `bills` (`bill_id`, `created`, `price`, `user_id`, `adress`) VALUES
-(1,	'2019-09-05 08:51:13',	11.50,	1,	'5 place Charles Hernu, 69100 VILLEURBANNE');
+(1,	'2019-09-05 08:51:13',	11.50,	1,	'5 place Charles Hernu, 69100 VILLEURBANNE'),
+(7,	'2019-09-05 10:42:36',	11.30,	1,	'5 place Charles Hernu, 69100 VILLEURBANNE'),
+(8,	'2019-09-05 11:35:11',	4.80,	1,	'5 place Charles Hernu, 69100 VILLEURBANNE'),
+(9,	'2019-09-05 13:08:42',	9.10,	1,	'5 place Charles Hernu, 69100 VILLEURBANNE');
 
 DELIMITER ;;
 
@@ -44,11 +47,17 @@ CREATE TABLE `bills_lines` (
   KEY `bill_id` (`bill_id`),
   CONSTRAINT `bills_lines_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE NO ACTION,
   CONSTRAINT `bills_lines_ibfk_3` FOREIGN KEY (`bill_id`) REFERENCES `bills` (`bill_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 INSERT INTO `bills_lines` (`line_id`, `product_id`, `quantity`, `bill_id`, `price`) VALUES
 (1,	1,	1,	1,	2.50),
-(2,	3,	2,	1,	4.50);
+(2,	3,	2,	1,	4.50),
+(18,	2,	1,	7,	2.30),
+(19,	3,	2,	7,	4.50),
+(20,	1,	1,	8,	2.50),
+(21,	2,	1,	8,	2.30),
+(22,	2,	2,	9,	2.30),
+(23,	3,	1,	9,	4.50);
 
 DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
@@ -99,7 +108,7 @@ INSERT INTO `roles` (`role_id`, `role`) VALUES
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `role_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL DEFAULT '1',
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `firstname` varchar(255) NOT NULL,
@@ -112,11 +121,13 @@ CREATE TABLE `users` (
   KEY `lastbill` (`lastbill`),
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`),
   CONSTRAINT `users_ibfk_2` FOREIGN KEY (`lastbill`) REFERENCES `bills` (`bill_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 INSERT INTO `users` (`user_id`, `role_id`, `email`, `password`, `firstname`, `lastname`, `adress`, `lastbill`) VALUES
 (1,	2,	'admin@aromaBioHuiles.com',	'admin',	'Administrateur',	'aromaBioHuiles',	'2 rue Francis de Pressenssé, 69100 VILLEURBANNE',	1),
 (2,	1,	'test1@test.com',	'test',	'Test1',	'User',	'561 boulevard Victor Hugo, 59000 LILLE',	NULL),
-(3,	1,	'test2@test.com',	'test',	'Test2',	'User',	'17 rue du Général Leclerc, 13000 MARSEILLE',	NULL);
+(3,	1,	'test2@test.com',	'test',	'Test2',	'User',	'17 rue du Général Leclerc, 13000 MARSEILLE',	NULL),
+(4,	1,	'j.doe@test.com',	'jane',	'Jane',	'Doe',	'1 rue du test, 69000 LYON',	NULL),
+(6,	1,	'j2.doe@test.com',	'john',	'John',	'Doe',	'1 rue du test, 69000 LYON',	NULL);
 
--- 2019-09-05 10:39:14
+-- 2019-09-05 13:39:14

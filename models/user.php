@@ -8,7 +8,11 @@
     function auth($email, $password)
     {
         global $pdo;
-        $stmt = $pdo->prepare('SELECT `user_id`, `role_id`, `email`, `password`, `firstname`, `lastname` FROM users WHERE email=?');
+        $stmt = $pdo->prepare(
+            'SELECT `user_id`, `role_id`, `email`, `password`, `firstname`, `lastname`
+            FROM users
+            WHERE email=?'
+        );
         $stmt->execute([$_POST['email']]);
         $user = $stmt->fetch(\PDO::FETCH_OBJ);
     
@@ -23,6 +27,23 @@
             $user->role = $role->role;
             $_SESSION['user'] = $user;
             $_SESSION['cart'] = [];
+            return true;
+
+        } else {
+            return false;
+        }
+    }
+
+    function add($firstname, $lastname, $email, $adress, $password)
+    {
+        global $pdo;
+        $stmt = $pdo->prepare(
+            'INSERT INTO users (`firstname`, `lastname`, `email`, `adress`, `password`)
+            VALUES (?, ?, ?, ?, ?)'
+        );
+        $result = $stmt->execute([$firstname, $lastname, $email, $adress, $password]);
+
+        if ($result) {
             return true;
 
         } else {
